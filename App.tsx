@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import CameraScreen from './src/screens/CameraScreen';
+import Home from './src/screens/Home';
+import LoginScreen from './src/screens/LoginScreen';
+import PreviewScreen from './src/screens/PreviewScreen';
+import SignupScreen from './src/screens/SignupScreen';
+import { getUser } from './src/utils/userStorage';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={getUser() ? 'Home' : 'LoginScreen'}>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Your Photos' }}
+        />
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ title: 'Login' }}
+        />
+        <Stack.Screen
+          name="SignupScreen"
+          component={SignupScreen}
+          options={{ title: 'Signup' }}
+        />
+        <Stack.Screen
+          name="CameraScreen"
+          component={CameraScreen}
+          options={{ title: 'Camera' }}
+        />
+        <Stack.Screen
+          name="PreviewScreen"
+          component={PreviewScreen}
+          options={{ title: 'Preview' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
