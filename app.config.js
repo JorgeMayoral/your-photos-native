@@ -24,6 +24,7 @@ export default {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
       },
+      package: 'dev.yorch.yourphotos',
     },
     web: {
       favicon: './assets/favicon.png',
